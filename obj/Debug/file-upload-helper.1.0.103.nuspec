@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>file-upload-helper</id>
+    <version>1.0.103</version>
+    <authors>sihle_ndlovu</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Azure.Storage.Blobs" version="12.13.1" exclude="Build,Analyzers" />
+        <dependency id="Firebase.Auth" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="FirebaseStorage.net" version="1.0.3" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting" version="2.2.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting.Abstractions" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Features" version="5.0.17" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="/home/codetech/Desktop/Mobile And Web Development/Asp.net_core_Workspace/FileUploadHelper/bin/Debug/net6.0/FileUploadHelper.dll" target="lib/net6.0/FileUploadHelper.dll" />
+  </files>
+</package>

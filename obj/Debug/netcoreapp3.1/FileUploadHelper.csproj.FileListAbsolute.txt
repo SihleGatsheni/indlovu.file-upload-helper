@@ -1,0 +1,10 @@
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\bin\Debug\netcoreapp3.1\FileUploadHelper.deps.json
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\bin\Debug\netcoreapp3.1\FileUploadHelper.dll
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\bin\Debug\netcoreapp3.1\FileUploadHelper.pdb
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.csproj.AssemblyReference.cache
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.AssemblyInfoInputs.cache
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.AssemblyInfo.cs
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.csproj.CoreCompileInputs.cache
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.dll
+C:\Users\codeD\Desktop\Honours\Software Engineering Project\FileUploadHelper\obj\Debug\netcoreapp3.1\FileUploadHelper.pdb
