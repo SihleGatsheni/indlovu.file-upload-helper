@@ -73,7 +73,6 @@ await _fileStrategy.UploadAsync("Images",image, cancellationToken); //returns fi
 
 In `Program.cs`, add the following code:
 
-
 ```
  services.AddScoped(_ => {
                 return new BlobServiceClient(BlobConfig.BlobConString);
