@@ -6,8 +6,7 @@ namespace FileUploadHelper.Strategy
 {
     public interface IUploadFileStrategy
     {
-        bool Remove(string path, string filename);
-        string Upload(string path, IFormFile file);
+        Task<bool> RemoveAsync(string path, string filename);
         Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancellationToken = default);
     }
 }

@@ -17,7 +17,7 @@ namespace FileUploadHelper.Strategy
         }
         
         public async Task<string> PutAsync(string dirPath, IFormFile image, CancellationToken cancellationToken = default)
-        {
+        { 
             if (image is null) return string.Empty;
             
             var filename = Guid.NewGuid() + "-" + image.FileName;
@@ -30,24 +30,11 @@ namespace FileUploadHelper.Strategy
             return filename;
         }
 
-        public bool Remove(string containerName, string filename)
+        public async Task<bool> RemoveAsync(string containerName, string filename)
         {
             var blobContainer = _client.GetBlobContainerClient(containerName);
             var blobClient = blobContainer.GetBlobClient(filename);
-            return blobClient.DeleteIfExistsAsync().Result;      
-        }
-
-        public string Put(string containerName, IFormFile fileToUpload)
-        {
-            if (fileToUpload is null) return string.Empty;
-            var filename = Guid.NewGuid() + "-" + fileToUpload.FileName;
-
-            var blobContainer = _client.GetBlobContainerClient(containerName);
-
-            var blobClient = blobContainer.GetBlobClient(filename);
-
-            blobClient.Upload(fileToUpload.OpenReadStream());
-            return filename;
+            return await blobClient.DeleteIfExistsAsync();      
         }
     }
 }

@@ -19,8 +19,6 @@ The library provides a convenient interface for interacting with the code and al
     - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.0.103`</span>
     - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.0.103`</span>
 
-That's it! Your markdown file is now beautifully styled with colors. Let me know if there's anything else I can assist you with!
-
 
 ## Interface Methods (IUploadFileStrategy)
 ```
@@ -67,7 +65,7 @@ To use the <span style="color: blue;">LocalFileUploadHelper</span> strategy, you
 ```
 
 ```
-user.ImageUrl = await _fileStrategy.UploadAsync("Images",image);;
+await _fileStrategy.UploadAsync("Images",image, cancellationToken);;
 ```
 <span style="color: #4285F4; font-weight: bold;">After injecting the dependencies, you only need one line to upload your file.</span>
 
@@ -107,7 +105,7 @@ public AccomodationRepo(BlobServiceClient client)
 ```
 
 ```
- CoverPhoto = await _fileUpLoad.UploadAsync(Params.CoverImage),
+await _fileUpLoad.UploadAsync("Products",Params.CoverImage, cancellationToken);
 ```
 <span style="color: #4285F4; font-weight: bold;">This is how convenient all the methods are just a one liner</span>
 
@@ -139,7 +137,7 @@ public class FirebaseStorageConfiguration
 }
 ```
 ```
- CategoryImageUrl = await _uploadHelper.UploadAsync("CategoryPictures",category.CategoryImageUrl, cancellationToken)
+ await _uploadHelper.UploadAsync("CategoryPictures",category.CategoryImageUrl, cancellationToken)
 ```
 
 <span style="color: #4285F4; font-weight: bold;">The above strategies offer one-liners and a few configs, and that's it. You have access to all the providers.</span>
@@ -153,7 +151,7 @@ private static async Task<IEnumerable<string>> AddProductPictures(IFormFileColle
         var pictures = new List<string>();
         foreach (var image in collection)
         {
-            pictures.Add(await _fileStrategy.UploadAsync("ProductPictures", image));
+            pictures.Add(await _fileStrategy.UploadAsync("ProductPictures", image, cancellationToken));
         }
         return pictures;
     }

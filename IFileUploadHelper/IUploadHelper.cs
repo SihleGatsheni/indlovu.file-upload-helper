@@ -6,8 +6,7 @@ namespace FileUploadHelper.IFileUploadHelper
 {
    public interface IUploadHelper
     {
-        public string Put(string dirPath, IFormFile image);
         public Task<string> PutAsync(string dirPath, IFormFile image, CancellationToken cancellationToken = default);
-        public bool Remove(string dirPath, string filename);
+        public Task<bool> RemoveAsync(string dirPath, string filename);
     }
 }
