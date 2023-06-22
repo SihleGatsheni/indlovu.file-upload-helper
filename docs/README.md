@@ -90,14 +90,10 @@ In `Program.cs`, add the following code:
 ```
 
 ```
-private IFileUpload<Accomodation> _fileUpLoad;
-private readonly BlobServiceClient client;
+private readonly IUploadFileStrategy _fileStrategy;
 public AccomodationRepo(BlobServiceClient client)
   {
-         web = host;
-         _fileUpLoad = new AccomodationUpload(client);
-         db = context;
-         this.client = client;
+         _fileUpLoad = new UploadFileStrategy(new AzureStorageFileUploadHelper(client));
   }
 
 ```
