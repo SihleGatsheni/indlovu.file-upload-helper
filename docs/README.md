@@ -16,22 +16,21 @@ The library provides a convenient interface for interacting with the code and al
 
    Alternatively, you can use the following commands to reference the package to your project:
 
-    - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.0.103`</span>
-    - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.0.103`</span>
+    - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.2.1`</span>
+    - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.2.1`</span>
 
 
 ## Interface Methods (IUploadFileStrategy)
 ```
 public interface IUploadFileStrategy
 {
-bool Remove(string path, string filename);
-string Upload(string path, IFormFile file);
+Task<bool> Remove(string path, string filename);
 Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancellationToken = default);
 }
 ```
-#### - Upload() : <span style="color: blue;">uploads</span> your file synchronously using any of your chosen strategy and takes in <span style="color: purple;">containerName/filepath</span> and <span style="color: green;">IFormFile</span>.
+
 #### - UploadAsync() : <span style="color: blue;">uploads</span> your file asynchronously using any of your chosen strategy and takes in <span style="color: purple;">containerName/filepath</span>, <span style="color: green;">IFormFile</span>, and a <span style="color: orange;">cancellationToken</span>.
-#### - Remove() : <span style="color: blue;">removes</span> the file based on the <span style="color: purple;">filename</span>. Takes in the <span style="color: purple;">containerName/filepath</span> and <span style="color: purple;">filename</span>.
+#### - RemoveAsync() : <span style="color: blue;">removes</span> the file based on the <span style="color: purple;">filename</span>. Takes in the <span style="color: purple;">containerName/filepath</span> and <span style="color: purple;">filename</span>.
 
 ### The Concrete Implementation of the above interface constructor looks like below to support the swapping of multiple strategies
 ```
@@ -65,7 +64,7 @@ To use the <span style="color: blue;">LocalFileUploadHelper</span> strategy, you
 ```
 
 ```
-await _fileStrategy.UploadAsync("Images",image, cancellationToken);;
+await _fileStrategy.UploadAsync("Images",image, cancellationToken); //returns filename
 ```
 <span style="color: #4285F4; font-weight: bold;">After injecting the dependencies, you only need one line to upload your file.</span>
 
@@ -105,7 +104,7 @@ public AccomodationRepo(BlobServiceClient client)
 ```
 
 ```
-await _fileUpLoad.UploadAsync("Products",Params.CoverImage, cancellationToken);
+await _fileUpLoad.UploadAsync("Products",Params.CoverImage, cancellationToken); //returns filename
 ```
 <span style="color: #4285F4; font-weight: bold;">This is how convenient all the methods are just a one liner</span>
 
@@ -137,11 +136,10 @@ public class FirebaseStorageConfiguration
 }
 ```
 ```
- await _uploadHelper.UploadAsync("CategoryPictures",category.CategoryImageUrl, cancellationToken)
+ await _uploadHelper.UploadAsync("CategoryPictures",category.CategoryImageUrl, cancellationToken) //returns downloadlink
 ```
 
 <span style="color: #4285F4; font-weight: bold;">The above strategies offer one-liners and a few configs, and that's it. You have access to all the providers.</span>
-
 <span style="color: #4285F4; font-weight: bold;">Below is an example of how to upload multiple images:</span>
 
 
