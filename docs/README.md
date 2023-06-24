@@ -29,10 +29,10 @@ Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancella
 }
 ```
 
-#### - UploadAsync() : <span style="color: blue;">uploads</span> your file asynchronously using any of your chosen strategy and takes in <span style="color: purple;">containerName/filepath</span>, <span style="color: green;">IFormFile</span>, and a <span style="color: orange;">cancellationToken</span>.
-#### - RemoveAsync() : <span style="color: blue;">removes</span> the file based on the <span style="color: purple;">filename</span>. Takes in the <span style="color: purple;">containerName/filepath</span> and <span style="color: purple;">filename</span>.
+ - UploadAsync() : <span style="color: blue;">uploads</span> your file asynchronously using any of your chosen strategy and takes in <span style="color: purple;">containerName/filepath</span>, <span style="color: green;">IFormFile</span>, and a <span style="color: orange;">cancellationToken</span>.
+ - RemoveAsync() : <span style="color: blue;">removes</span> the file based on the <span style="color: purple;">filename</span>. Takes in the <span style="color: purple;">containerName/filepath</span> and <span style="color: purple;">filename</span>.
 
-### The Concrete Implementation of the above interface constructor looks like below to support the swapping of multiple strategies
+## The Concrete Implementation of the above interface constructor looks like below to support the swapping of multiple strategies
 ```
  public UploadFileStrategy(IUploadHelper uploadHelper)
         {
@@ -40,16 +40,16 @@ Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancella
         }
 ```
 ## There are three strategies to choose from namely
-### - <span style="color: blue;">LocalFileUploadHelper</span>
-### - <span style="color: purple;">AzureStorageFileUploadHelper</span>
-### - <span style="color: green;">FirebaseStorageFileUploadHelper</span>
+ - <span style="color: blue;">LocalFileUploadHelper</span>
+- <span style="color: purple;">AzureStorageFileUploadHelper</span>
+ - <span style="color: green;">FirebaseStorageFileUploadHelper</span>
 
-### _with future plans to support <span style="color: orange;">AWS S3 Bucket</span> storage in the next versions_
+ _with future plans to support <span style="color: orange;">AWS S3 Bucket</span> storage in the next versions_
 
 
 ## How to Use the Library With the different Strategies
 
-### 1) <span style="color: blue;">LocalFileUploadHelper</span>
+ 1) <span style="color: blue;">LocalFileUploadHelper</span>
 
 To use the <span style="color: blue;">LocalFileUploadHelper</span> strategy, you need to inject the necessary dependencies.
 
@@ -80,7 +80,7 @@ In `Program.cs`, add the following code:
 ```
 
 
-### Custom Object 
+## Custom Object 
 ```
  public class BlobConfig
     {
