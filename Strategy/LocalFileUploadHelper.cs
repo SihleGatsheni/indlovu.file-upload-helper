@@ -22,6 +22,7 @@ namespace FileUploadHelper.Strategy
         {
             if (image is null) return string.Empty;
             var uploadDir = Path.Combine(_hostEnvironment.WebRootPath, dirPath);
+            Directory.CreateDirectory(uploadDir);
             var fileName = Guid.NewGuid() + "-" + image.FileName;
             var filePath = Path.Combine(uploadDir, fileName);
             await using var fileStream = new FileStream(filePath, FileMode.Create);
