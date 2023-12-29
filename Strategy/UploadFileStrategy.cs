@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FileUploadHelper.Strategy
 {
-    public class UploadFileStrategy : IUploadFileStrategy
+    public class UploadFileStrategy
     {
         private readonly IUploadHelper _uploadHelper;
 
@@ -15,9 +15,9 @@ namespace FileUploadHelper.Strategy
             _uploadHelper = uploadHelper;
         }
         
-        public async Task<bool> RemoveAsync(string path, string filename)
+        public async Task<bool> RemoveAsync(string path, string filename, CancellationToken cancellationToken = default)
         {
-            return await _uploadHelper.RemoveAsync(path, filename);
+            return await _uploadHelper.RemoveAsync(path, filename, cancellationToken);
         }
 
         public async Task<string> UploadAsync (string path,IFormFile file, CancellationToken cancellationToken = default)

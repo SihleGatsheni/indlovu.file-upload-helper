@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace FileUploadHelper.Strategy;
 
-public class FirebaseStorageFileUploadHelper: IUploadHelper
+public class FirebaseStorageFileUploadStrategy: IUploadHelper
 {
-    private readonly FirebaseStorageConfiguration _storageConfiguration;
+    private readonly FirebaseStorageCredentials _storageConfiguration;
 
-    public FirebaseStorageFileUploadHelper(FirebaseStorageConfiguration configuration)
+    public FirebaseStorageFileUploadStrategy(FirebaseStorageCredentials configuration)
     {
         _storageConfiguration = configuration;
     }

@@ -7,11 +7,11 @@ using Azure.Storage.Blobs;
 
 namespace FileUploadHelper.Strategy
 {
-    public class AzureStorageFileUploadHelper : IUploadHelper
+    public class AzureStorageFileUploadStrategy : IUploadHelper
     {
         private readonly BlobServiceClient _client;
 
-        public AzureStorageFileUploadHelper(BlobServiceClient client)
+        public AzureStorageFileUploadStrategy(BlobServiceClient client)
         {
             _client = client;
         }

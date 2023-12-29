@@ -1,6 +1,6 @@
 namespace FileUploadHelper.Model;
 
-public class FirebaseStorageConfiguration
+public class FirebaseStorageCredentials
 {
     public string ApiKey { get; set; }
     public string Bucket { get; set; }

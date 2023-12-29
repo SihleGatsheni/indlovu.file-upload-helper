@@ -11,10 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="docs/README.md" Pack="true" PackagePath="\"/>
+    <None Include="docs/README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.304.13" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.13.1" />
     <PackageReference Include="Firebase.Auth" Version="1.0.0" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />

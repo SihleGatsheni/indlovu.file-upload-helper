@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FileUploadHelper.Strategy
 {
-    public class LocalFileUploadHelper : IUploadHelper
+    public class LocalFileUploadStrategy : IUploadHelper
     {
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public LocalFileUploadHelper(IWebHostEnvironment hostEnvironment)
+        public LocalFileUploadStrategy(IWebHostEnvironment hostEnvironment)
         {
             _hostEnvironment = hostEnvironment;
         }
