@@ -49,7 +49,7 @@ public class AWSS3FileUploadStrategy : IUploadHelper
         {
             BucketName = _credentials.BucketName,
             Key = filename,
-            Expires = DateTime.Now.AddMonths(24)
+            Expires = DateTime.Now.AddDays(5)
         }) : string.Empty;
     }
 
