@@ -44,7 +44,13 @@ public class AWSS3FileUploadStrategy : IUploadHelper
             InputStream = image.OpenReadStream(),
             ContentType = image.ContentType,
         }, cancellationToken);
-        return putRequest.HttpStatusCode == System.Net.HttpStatusCode.OK ? filename : string.Empty;
+
+        return putRequest.HttpStatusCode == System.Net.HttpStatusCode.OK ? _client.GetPreSignedURL(new GetPreSignedUrlRequest
+        {
+            BucketName = _credentials.BucketName,
+            Key = filename,
+            Expires = DateTime.Now.AddMonths(24)
+        }) : string.Empty;
     }
 
     public async Task<bool> RemoveAsync(string dirPath, string filename)

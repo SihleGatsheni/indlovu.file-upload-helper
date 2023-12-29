@@ -17,7 +17,7 @@ namespace FileUploadHelper.Strategy
         
         public async Task<bool> RemoveAsync(string path, string filename, CancellationToken cancellationToken = default)
         {
-            return await _uploadHelper.RemoveAsync(path, filename, cancellationToken);
+            return await _uploadHelper.RemoveAsync(path, filename);
         }
 
         public async Task<string> UploadAsync (string path,IFormFile file, CancellationToken cancellationToken = default)
