@@ -21,7 +21,7 @@ public class AWSS3FileUploadStrategy : IUploadHelper
         _client = new AmazonS3Client(credentials.AccessKey, credentials.SecretKey, RegionEndpoint.GetBySystemName(credentials.Region));
     }
 
-    public async Task<string> PutAsync(string dirPath, IFormFile image, CancellationToken cancellationToken = default)
+    public async Task<string> PutAsync(IFormFile image,string dirPath, CancellationToken cancellationToken)
     {
         if (image is null) return string.Empty;
         var filename = Guid.NewGuid() + "-" + image.FileName;
@@ -53,7 +53,7 @@ public class AWSS3FileUploadStrategy : IUploadHelper
         }) : string.Empty;
     }
 
-    public async Task<bool> RemoveAsync(string dirPath, string filename)
+    public async Task<bool> RemoveAsync(string filename, string dirPath)
     {
         var deleteRequest = new DeleteObjectRequest
         {

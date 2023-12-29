@@ -21,7 +21,7 @@ public class FirebaseStorageFileUploadStrategy: IUploadHelper
     }
 
     
-    public async Task<string> PutAsync(string dirPath, IFormFile image,CancellationToken cancellationToken = default)
+    public async Task<string> PutAsync(IFormFile image,string dirPath,CancellationToken cancellationToken)
     {
         var auth = new FirebaseAuthProvider(new FirebaseConfig(_storageConfiguration.ApiKey));
         var authorized =
@@ -52,7 +52,7 @@ public class FirebaseStorageFileUploadStrategy: IUploadHelper
         }
     }
 
-    public Task<bool> RemoveAsync(string dirPath, string filename)
+    public Task<bool> RemoveAsync(string filename,string dirPath)
     {
         var auth = new FirebaseAuthProvider(new FirebaseConfig(_storageConfiguration.ApiKey));
         var authorized = 

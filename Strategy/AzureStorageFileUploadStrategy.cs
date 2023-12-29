@@ -16,7 +16,7 @@ namespace FileUploadHelper.Strategy
             _client = client;
         }
         
-        public async Task<string> PutAsync(string dirPath, IFormFile image, CancellationToken cancellationToken = default)
+        public async Task<string> PutAsync(IFormFile image,string dirPath, CancellationToken cancellationToken = default)
         { 
             if (image is null) return string.Empty;
             

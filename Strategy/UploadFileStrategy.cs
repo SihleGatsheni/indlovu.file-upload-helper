@@ -15,14 +15,14 @@ namespace FileUploadHelper.Strategy
             _uploadHelper = uploadHelper;
         }
         
-        public async Task<bool> RemoveAsync(string path, string filename, CancellationToken cancellationToken = default)
+        public async Task<bool> RemoveAsync(string filename, string path = "")
         {
-            return await _uploadHelper.RemoveAsync(path, filename);
+            return await _uploadHelper.RemoveAsync(filename,path);
         }
 
-        public async Task<string> UploadAsync (string path,IFormFile file, CancellationToken cancellationToken = default)
+        public async Task<string> UploadAsync (IFormFile file,string path = "", CancellationToken cancellationToken = default)
         {
-          return await _uploadHelper.PutAsync(path,file, cancellationToken);
+          return await _uploadHelper.PutAsync(file,path, cancellationToken);
         } 
     }
 }

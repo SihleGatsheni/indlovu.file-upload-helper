@@ -18,7 +18,7 @@ namespace FileUploadHelper.Strategy
             _hostEnvironment = hostEnvironment;
         }
 
-        public async Task<string> PutAsync(string dirPath, IFormFile image, CancellationToken cancellationToken = default)
+        public async Task<string> PutAsync(IFormFile image,string dirPath, CancellationToken cancellationToken)
         {
             if (image is null) return string.Empty;
             var uploadDir = Path.Combine(_hostEnvironment.WebRootPath, dirPath);
@@ -30,7 +30,7 @@ namespace FileUploadHelper.Strategy
             return fileName;
         }
 
-        public Task<bool> RemoveAsync(string dirPath, string filename)
+        public Task<bool> RemoveAsync(string filename, string dirPath)
         {
             filename = Path.Combine(_hostEnvironment.WebRootPath, dirPath, filename);
             var file = new FileInfo(filename);
