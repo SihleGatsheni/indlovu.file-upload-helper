@@ -20,7 +20,7 @@ namespace FileUploadHelper.Strategy
             return await _uploadHelper.RemoveAsync(filename,path);
         }
 
-        public async Task<string> UploadAsync (IFormFile file,string path = "", CancellationToken cancellationToken = default)
+        public async Task<string> PutAsync (IFormFile file,string path = "", CancellationToken cancellationToken = default)
         {
           return await _uploadHelper.PutAsync(file,path, cancellationToken);
         } 
