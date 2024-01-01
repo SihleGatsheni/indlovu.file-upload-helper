@@ -13,7 +13,7 @@ public static class FileUploadExtentions
 
     public static IServiceCollection AddFileWithAWSS3trategy(this IServiceCollection services, AWSS3Credentials credentials)
     {
-        services.AddScoped<IUploadHelperStrategy, AWSS3FileUploadStrategy>(provider =>
+        services.AddScoped<IUploadHelperStrategy, AWSS3FileUploadStrategy>(_ =>
         {
             return new AWSS3FileUploadStrategy(credentials);
         });
