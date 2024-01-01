@@ -1,13 +1,14 @@
-﻿using FileUploadHelper.IFileUploadHelper;
+﻿
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using FileUploadHelper.FileUploadHelperStrategy;
 
 namespace FileUploadHelper.Strategy
 {
-    public class AzureStorageFileUploadStrategy : IUploadHelper
+    public class AzureStorageFileUploadStrategy : IUploadHelperStrategy
     {
         private readonly BlobServiceClient _client;
 

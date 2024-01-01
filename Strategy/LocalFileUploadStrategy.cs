@@ -1,15 +1,15 @@
-﻿using FileUploadHelper.IFileUploadHelper;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using FileUploadHelper.FileUploadHelperStrategy;
 
 namespace FileUploadHelper.Strategy
 {
-    public class LocalFileUploadStrategy : IUploadHelper
+    public class LocalFileUploadStrategy : IUploadHelperStrategy
     {
         private readonly IWebHostEnvironment _hostEnvironment;
 

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using FileUploadHelper.IFileUploadHelper;
+using FileUploadHelper.FileUploadHelperStrategy;
 using FileUploadHelper.Model;
 using Firebase.Auth;
 using Firebase.Storage;
@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FileUploadHelper.Strategy;
 
-public class FirebaseStorageFileUploadStrategy: IUploadHelper
+public class FirebaseStorageFileUploadStrategy: IUploadHelperStrategy
 {
     private readonly FirebaseStorageCredentials _storageConfiguration;
 

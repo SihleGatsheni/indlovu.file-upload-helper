@@ -5,12 +5,12 @@ using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
-using FileUploadHelper.IFileUploadHelper;
+using FileUploadHelper.FileUploadHelperStrategy;
 using Microsoft.AspNetCore.Http;
 using Model;
 
 namespace FileUploadHelper.Strategy;
-public class AWSS3FileUploadStrategy : IUploadHelper
+public class AWSS3FileUploadStrategy : IUploadHelperStrategy
 {
     private readonly AmazonS3Client _client;
     private readonly AWSS3Credentials _credentials;

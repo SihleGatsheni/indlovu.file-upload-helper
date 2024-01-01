@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using FileUploadHelper.IFileUploadHelper;
+using FileUploadHelper.FileUploadHelperStrategy;
 using Microsoft.AspNetCore.Http;
 
 
@@ -8,9 +8,9 @@ namespace FileUploadHelper.Strategy
 {
     public class UploadFileStrategy
     {
-        private readonly IUploadHelper _uploadHelper;
+        private readonly IUploadHelperStrategy _uploadHelper;
 
-        public UploadFileStrategy(IUploadHelper uploadHelper)
+        public UploadFileStrategy(IUploadHelperStrategy uploadHelper)
         {
             _uploadHelper = uploadHelper;
         }
