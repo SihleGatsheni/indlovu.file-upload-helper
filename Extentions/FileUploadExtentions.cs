@@ -11,7 +11,7 @@ namespace Extentions;
 public static class FileUploadExtentions
 {
 
-    public static IServiceCollection AddFileWithAWStrategy(this IServiceCollection services, AWSS3Credentials credentials)
+    public static IServiceCollection AddFileWithAWSS3trategy(this IServiceCollection services, AWSS3Credentials credentials)
     {
         services.AddScoped<IUploadHelperStrategy, AWSS3FileUploadStrategy>(provider =>
         {

@@ -1,12 +1,20 @@
 # <span style="color:#337ab7;">FILE-UPLOAD-HELPER</span>
 
+
 ## <span style="color:#337ab7;">Hi there! Welcome to the <span style="color:#ff7f50;">file-upload-helper</span> docs</span>
+
+## Added Features 
+Support for dependency injection
+AWSS3 - AddFileWithAWSS3trategy
+Azure - AddFileWithAZureBlobStrategy
+Firebase - AddFileWithAFirebaseStorageStrategy
+FileSystem - AddFileWithLocalFileSystemStrategy
 
 <span style="color:#ff7f50;">File-upload-helper</span> is a tool designed to help .Net developers speed up their development by offering functionalities like:
 
 - Uploading files to different servers and cloud providers for storage.
-- Currently, it supports 2 cloud storage providers: Google Firebase Storage and Azure Blob Storage.
-- It also offers the ability to write your files on the server's `wwwroot` directory.
+- Supported cloud storage providers: AWS S3, Google Firebase Storage and Azure Blob Storage.
+- It also offers the ability to write your files on the server's `wwwroot` directory/filesystem.
 
 ## <span style="color:#337ab7;">Usage</span>
 
@@ -16,16 +24,16 @@ The library provides a convenient interface for interacting with the code and al
 
    Alternatively, you can use the following commands to reference the package to your project:
 
-    - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.2.1`</span>
-    - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.2.1`</span>
+    - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.3.4`</span>
+    - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.3.4`</span>
 
 
-## Interface Methods (IUploadFileStrategy)
+## Interface Methods (IUploadHelperStrategy)
 ```
-public interface IUploadFileStrategy
+public interface IUploadHelperStrategy
 {
 Task<bool> Remove(string path, string filename);
-Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancellationToken = default);
+Task<string> UploadAsync( IFormFile file,string path ="", CancellationToken cancellationToken = default);
 }
 ```
 
@@ -39,12 +47,11 @@ Task<string> UploadAsync(string path, IFormFile file, CancellationToken cancella
             _uploadHelper = uploadHelper;
         }
 ```
-## There are three strategies to choose from namely
+## There are 4 strategies to choose from namely
  - <span style="color: blue;">LocalFileUploadHelper</span>
 - <span style="color: purple;">AzureStorageFileUploadHelper</span>
  - <span style="color: green;">FirebaseStorageFileUploadHelper</span>
-
- _with future plans to support <span style="color: orange;">AWS S3 Bucket</span> storage in the next versions_
+  - <span style="color: green;">AWSS3FileUploadStrategy</span>
 
 
 ## How to Use the Library With the different Strategies
