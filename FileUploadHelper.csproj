@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <PackageId>file-upload-helper</PackageId>
-    <Version>1.3.4.1</Version>
+    <Version>1.3.6</Version>
     <Authors>sihle_ndlovu</Authors>
     <Company>indlovu_code</Company>
     <PackageReadmeFile>README.md</PackageReadmeFile>

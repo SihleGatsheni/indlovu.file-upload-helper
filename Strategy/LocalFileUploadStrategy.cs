@@ -9,7 +9,7 @@ using FileUploadHelper.FileUploadHelperStrategy;
 
 namespace FileUploadHelper.Strategy
 {
-    public class LocalFileUploadStrategy : IUploadHelperStrategy
+    internal class LocalFileUploadStrategy : IUploadHelperStrategy
     {
         private readonly IWebHostEnvironment _hostEnvironment;
 

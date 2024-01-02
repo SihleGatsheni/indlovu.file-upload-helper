@@ -1,4 +1,4 @@
-namespace Model;
+namespace FileUploadHelper.Model;
 
 public class AWSS3Credentials
 {

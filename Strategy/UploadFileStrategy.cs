@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FileUploadHelper.Strategy
 {
-    public class UploadFileStrategy
+    internal class UploadFileStrategy
     {
         private readonly IUploadHelperStrategy _uploadHelper;
 

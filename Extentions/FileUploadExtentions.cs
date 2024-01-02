@@ -1,21 +1,21 @@
 using System;
+using Amazon.S3.Model;
 using Azure.Storage.Blobs;
 using FileUploadHelper.FileUploadHelperStrategy;
 using FileUploadHelper.Model;
 using FileUploadHelper.Strategy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Model;
 
-namespace Extentions;
+namespace FileUploadHelper.Extentions;
 public static class FileUploadExtentions
 {
 
-    public static IServiceCollection AddFileWithAWSS3trategy(this IServiceCollection services, AWSS3Credentials credentials)
+    public static IServiceCollection AddFileWithAWSS3trategy(this IServiceCollection services, AWSS3Credentials credentials, Action<PutBucketNotificationRequest> configureBucketNotificationEvents = null)
     {
         services.AddScoped<IUploadHelperStrategy, AWSS3FileUploadStrategy>(_ =>
         {
-            return new AWSS3FileUploadStrategy(credentials);
+            return new AWSS3FileUploadStrategy(credentials,configureBucketNotificationEvents);
         });
         return services;
     }

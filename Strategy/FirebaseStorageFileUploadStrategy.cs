@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace FileUploadHelper.Strategy;
 
-public class FirebaseStorageFileUploadStrategy: IUploadHelperStrategy
+internal class FirebaseStorageFileUploadStrategy: IUploadHelperStrategy
 {
     private readonly FirebaseStorageCredentials _storageConfiguration;
 

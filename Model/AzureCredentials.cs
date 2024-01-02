@@ -1,4 +1,4 @@
-namespace Model;
+namespace FileUploadHelper.Model;
 
 public class AzureCredentials{
     public string BlobConnectionString { get{ return $"DefaultEndPointsProtocol=https;AccountName={AzureBlobStorageAccountName};AccountKey={AccountAccessKey}";}}

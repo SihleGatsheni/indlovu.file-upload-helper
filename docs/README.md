@@ -1,160 +1,66 @@
-# <span style="color:#337ab7;">FILE-UPLOAD-HELPER</span>
+# FILE-UPLOAD-HELPER
 
+## Welcome to the file-upload-helper Documentation!
 
-## <span style="color:#337ab7;">Hi there! Welcome to the <span style="color:#ff7f50;">file-upload-helper</span> docs</span>
+### Added Features
+The file-upload-helper now supports dependency injection with strategies for various cloud providers:
 
-## Added Features 
-Support for dependency injection
-AWSS3 - AddFileWithAWSS3trategy
-Azure - AddFileWithAZureBlobStrategy
-Firebase - AddFileWithAFirebaseStorageStrategy
-FileSystem - AddFileWithLocalFileSystemStrategy
+- AWS S3: `AddFileWithAWSS3Strategy`
+- Azure Blob Storage: `AddFileWithAzureBlobStrategy`
+- Google Firebase Storage: `AddFileWithFirebaseStorageStrategy`
+- Local File System: `AddFileWithLocalFileSystemStrategy`
 
-<span style="color:#ff7f50;">File-upload-helper</span> is a tool designed to help .Net developers speed up their development by offering functionalities like:
+**file-upload-helper** accelerates .Net development by providing functionalities such as:
 
-- Uploading files to different servers and cloud providers for storage.
-- Supported cloud storage providers: AWS S3, Google Firebase Storage and Azure Blob Storage.
-- It also offers the ability to write your files on the server's `wwwroot` directory/filesystem.
+- File uploads to different servers and cloud providers.
+- Support for AWS S3, Azure Blob Storage, and Firebase Cloud Storage.
+- Writing files to the server's `wwwroot` directory/filesystem.
 
-## <span style="color:#337ab7;">Usage</span>
+## Usage
 
-The library provides a convenient interface for interacting with the code and allows you to switch between different providers easily. To use the library, follow these steps:
+1. Add the package to your project via [nuget.org](https://www.nuget.org/packages/file-upload-helper) or use the commands:
 
-1. Add the nuget package to your project through [nuget.org](https://www.nuget.org/packages/file-upload-helper).
+   - .NET CLI: `dotnet add package file-upload-helper --version 1.3.6`
+   - Package Manager: `Install-Package file-upload-helper -Version 1.3.6`
 
-   Alternatively, you can use the following commands to reference the package to your project:
-
-    - .NET CLI: <span style="color:#a71d5d;">`dotnet add package file-upload-helper --version 1.3.4`</span>
-    - Package Manager: <span style="color:#a71d5d;">`Install-Package file-upload-helper -Version 1.3.4`</span>
-
-
-## Interface Methods (IUploadHelperStrategy)
-```
-public interface IUploadHelperStrategy
+## Inject IUploadHelperStrategy
+```csharp
+public class Demo
 {
-Task<bool> Remove(string path, string filename);
-Task<string> UploadAsync( IFormFile file,string path ="", CancellationToken cancellationToken = default);
+    private readonly IUploadHelperStrategy strategy;
+    public Demo(IUploadHelperStrategy strategy){
+        this.strategy = strategy
+    }
 }
 ```
+## Set Up Desired Strategy Through DI(do not forget to set up or errors will the thrown)
+```csharp
+var builder = WebApplication.CreateBuilder(args);
 
- - UploadAsync() : <span style="color: blue;">uploads</span> your file asynchronously using any of your chosen strategy and takes in <span style="color: purple;">containerName/filepath</span>, <span style="color: green;">IFormFile</span>, and a <span style="color: orange;">cancellationToken</span>.
- - RemoveAsync() : <span style="color: blue;">removes</span> the file based on the <span style="color: purple;">filename</span>. Takes in the <span style="color: purple;">containerName/filepath</span> and <span style="color: purple;">filename</span>.
+- To use with AWS S3
+builder.Services.AddFileWithAWSS3trategy(new AWSS3Credentials());
 
-## The Concrete Implementation of the above interface constructor looks like below to support the swapping of multiple strategies
-```
- public UploadFileStrategy(IUploadHelper uploadHelper)
-        {
-            _uploadHelper = uploadHelper;
-        }
-```
-## There are 4 strategies to choose from namely
- - <span style="color: blue;">LocalFileUploadHelper</span>
-- <span style="color: purple;">AzureStorageFileUploadHelper</span>
- - <span style="color: green;">FirebaseStorageFileUploadHelper</span>
-  - <span style="color: green;">AWSS3FileUploadStrategy</span>
+Also support the configuration of notification lambda to be triggered by this Bucket events for S3 operation
 
-
-## How to Use the Library With the different Strategies
-
- 1) <span style="color: blue;">LocalFileUploadHelper</span>
-
-To use the <span style="color: blue;">LocalFileUploadHelper</span> strategy, you need to inject the necessary dependencies.
-
-```
- private readonly IUploadFileStrategy _fileStrategy;
-
-    public UpdateUserImageRepository(IWebHostEnvironment hostEnvironment)
-    {
-        _hostEnvironment = hostEnvironment;
-        _fileStrategy = new UploadFileStrategy(new LocalFileUploadHelper(hostEnvironment));
-    }
-```
-
-```
-await _fileStrategy.UploadAsync("Images",image, cancellationToken); //returns filename
-```
-<span style="color: #4285F4; font-weight: bold;">After injecting the dependencies, you only need one line to upload your file.</span>
-
-<span style="color: #4285F4; font-weight: bold;">2) AzureStorageFileUploadHelper:</span>  
-<span style="color: #4285F4; font-weight: bold;">Need to inject the necessary dependencies.</span>
-
-In `Program.cs`, add the following code:
-
-```
- services.AddScoped(_ => {
-                return new BlobServiceClient(BlobConfig.BlobConString);
-            });
-```
-
-
-## Custom Object 
-```
- public class BlobConfig
-    {
-        public  static string BlobConString { get { return "DefaultEndpointsProtocol=https;AccountName=yourAzureBlobStorageAccountName;AccountKey=yourApiKey"; } }
-        public static string ContainerName { get { return "yourAzureBlobContainerName"; } }
-    }
-```
-
-```
-private readonly IUploadFileStrategy _fileStrategy;
-public AccomodationRepo(BlobServiceClient client)
-  {
-         _fileUpLoad = new UploadFileStrategy(new AzureStorageFileUploadHelper(client));
-  }
-
-```
-
-```
-await _fileUpLoad.UploadAsync("Products",Params.CoverImage, cancellationToken); //returns filename
-```
-<span style="color: #4285F4; font-weight: bold;">This is how convenient all the methods are just a one liner</span>
-
-<span style="color: #4285F4; font-weight: bold;">2) FirebaseStorageFileUploadHelper:</span>  
-<span style="color: #4285F4; font-weight: bold;">Need to inject the necessary dependencies.</span>
-
-```
-private readonly IUploadFileStrategy _uploadHelper;
-
-    public ProductCategoryService(IConfiguration configuration)
-    {
-        _uploadHelper = new UploadFileStrategy(new FirebaseStorageFileUploadHelper(new FirebaseStorageConfiguration
-        {
-            ApiKey = configuration["Firebase:ApiKey"],
-            Bucket = configuration["Firebase:Bucket"],
-            AuthEmail = configuration["Firebase:AuthEmail"],
-            AuthPassword = configuration["Firebase:AuthPassword"]
-        }));
-    }
-```
-
-```
-public class FirebaseStorageConfiguration
+builder.Services.AddFileWithAWSS3trategy(new AWSS3Credentials(), configure =>
 {
-    public string ApiKey { get; set; }
-    public string Bucket { get; set; }
-    public string AuthEmail { get; set; }
-    public string AuthPassword { get; set; }
-}
-```
-```
- await _uploadHelper.UploadAsync("CategoryPictures",category.CategoryImageUrl, cancellationToken) //returns downloadlink
+    configure.LambdaFunctionConfigurations = new List<LambdaFunctionConfiguration>{
+            new LambdaFunctionConfiguration{
+                Id = "lambda",
+                Events = new List<EventType>{"s3:ObjectCreated:Put"},
+                FunctionArn = builder.Configuration["AWS_LAMBDA_FUNCTION_ARN"]
+            }
+        };
+}); 
+
+-To Use with Firebase storage
+builder.Services.AddFileWithAFirebaseStorageStrategy(new FirebaseStorageCredentials());
+
+-To Use with Azure Blob storage
+builder.Services.AddFileWithAZureBlobStrategy(new AzureCredentials());
+
+-To Use With Local FileSysyem
+builder.Services.AddFileWithLocalFileSystemStrategy(builder.Environment);
 ```
 
-<span style="color: #4285F4; font-weight: bold;">The above strategies offer one-liners and a few configs, and that's it. You have access to all the providers.</span>
-<span style="color: #4285F4; font-weight: bold;">Below is an example of how to upload multiple images:</span>
 
-
-```
-private static async Task<IEnumerable<string>> AddProductPictures(IFormFileCollection collection)
-    {
-        var pictures = new List<string>();
-        foreach (var image in collection)
-        {
-            pictures.Add(await _fileStrategy.UploadAsync("ProductPictures", image, cancellationToken));
-        }
-        return pictures;
-    }
-```
-
-<span style="color: #4285F4; font-size: 24px;">That's it, thank you for the read...</span>
