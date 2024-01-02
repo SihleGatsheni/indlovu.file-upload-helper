@@ -31,6 +31,9 @@ public class Demo
     public Demo(IUploadHelperStrategy strategy){
         this.strategy = strategy
     }
+
+    strategy.PutAsync() takes file(IFormFile), directory/path and cancelatioToken and returns uploaded filename/download url.
+    strategy.RemoveAsync() takes filename to be deleted and directory/path returns true if deletion was successful
 }
 ```
 ## Set Up Desired Strategy Through DI(do not forget to set up or errors will the thrown)
@@ -62,5 +65,6 @@ builder.Services.AddFileWithAZureBlobStrategy(new AzureCredentials());
 -To Use With Local FileSysyem
 builder.Services.AddFileWithLocalFileSystemStrategy(builder.Environment);
 ```
+
 
 
