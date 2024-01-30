@@ -6,4 +6,5 @@ public class AWSS3Credentials
     public string SecretKey { get; init; }
     public string BucketName { get; init; }
     public string Region { get; init; }
+    public bool IsPublicBucket { get; set; } = false;
 }

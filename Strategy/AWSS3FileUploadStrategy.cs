@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon;
@@ -52,7 +51,36 @@ internal class AWSS3FileUploadStrategy : IUploadHelperStrategy
                 await _client.PutBucketNotificationAsync(createBucketNotificationRequest, cancellationToken);
             }
         }
+        if (_credentials.IsPublicBucket)
+        {
+            var publicAccessBlockConfig = new PublicAccessBlockConfiguration
+            {
+                BlockPublicAcls = false,
+                IgnorePublicAcls = false,
+                BlockPublicPolicy = false,
+                RestrictPublicBuckets = false
+            };
 
+            // Create a PutPublicAccessBlockRequest
+            var request = new PutPublicAccessBlockRequest
+            {
+                BucketName = _credentials.BucketName,
+                PublicAccessBlockConfiguration = publicAccessBlockConfig
+            };
+
+            // Set the bucket to be public
+            await _client.PutPublicAccessBlockAsync(request, cancellationToken);
+            var putRequestObj = await _client.PutObjectAsync(new PutObjectRequest
+            {
+                BucketName = _credentials.BucketName,
+                Key = filename,
+                InputStream = image.OpenReadStream(),
+                ContentType = image.ContentType,
+            }, cancellationToken);
+
+            string objectUrl = $"https://{_credentials.BucketName}.s3.{_client.Config.RegionEndpoint.SystemName}.amazonaws.com/{filename}";
+            return putRequestObj.HttpStatusCode == System.Net.HttpStatusCode.OK ? objectUrl :string.Empty;
+        }
         var putRequest = await _client.PutObjectAsync(new PutObjectRequest
         {
             BucketName = _credentials.BucketName,
@@ -60,7 +88,6 @@ internal class AWSS3FileUploadStrategy : IUploadHelperStrategy
             InputStream = image.OpenReadStream(),
             ContentType = image.ContentType,
         }, cancellationToken);
-
         return putRequest.HttpStatusCode == System.Net.HttpStatusCode.OK ? _client.GetPreSignedURL(new GetPreSignedUrlRequest
         {
             BucketName = _credentials.BucketName,
